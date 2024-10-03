@@ -7,14 +7,14 @@ Commencez par créer un répertoire où vous allez configurer votre projet Vagra
 
 bash
 Copier le code
-```mkdir gitlab-vagrant
-cd gitlab-vagrant````
+mkdir gitlab-vagrant
+cd gitlab-vagrant
 2. Initialiser Vagrant
 Dans le répertoire créé, exécutez la commande suivante pour initialiser un fichier Vagrantfile.
 
 bash
 Copier le code
-```vagrant init ubuntu/bionic64```
+vagrant init ubuntu/bionic64
 Cela génère un fichier Vagrantfile basique pour Ubuntu 18.04 LTS (Bionic Beaver).
 
 3. Configurer le fichier Vagrantfile
@@ -22,7 +22,7 @@ Modifiez le fichier Vagrantfile pour installer GitLab CE et configurer la VM ave
 
 ruby
 Copier le code
-```Vagrant.configure("2") do |config|
+Vagrant.configure("2") do |config|
   # Utiliser l'image de base Ubuntu 18.04
   config.vm.box = "ubuntu/bionic64"
 
@@ -54,7 +54,7 @@ Copier le code
     vb.memory = "4096"  # Allouer 4 Go de RAM
     vb.cpus = 2         # Allouer 2 CPUs
   end
-end```
+end
 Explication des configurations :
 
 config.vm.box : Utilise Ubuntu 18.04 LTS comme image de base.
@@ -66,7 +66,7 @@ Une fois le fichier Vagrantfile configuré, démarrez la VM et exécutez les pro
 
 bash
 Copier le code
-```vagrant up```
+vagrant up
 Cela va :
 
 Télécharger et démarrer la VM Ubuntu.
@@ -74,14 +74,14 @@ Exécuter les commandes définies dans la section config.vm.provision pour insta
 5. Accéder à GitLab
 Une fois l’installation terminée, vous pouvez accéder à GitLab à l’adresse suivante sur votre navigateur :
 
-arduino
+http
 Copier le code
-```http://192.168.56.10```
+http://192.168.56.10
 Si vous avez configuré la redirection de port, vous pouvez aussi utiliser :
 
-arduino
+http
 Copier le code
-```http://localhost:8080```
+http://localhost:8080
 Note : Lors de la première connexion, vous devrez définir un mot de passe pour l'utilisateur root. Celui-ci sera l'administrateur de GitLab.
 
 6. (Optionnel) Configurer GitLab Container Registry
@@ -91,17 +91,17 @@ Ouvrez le fichier de configuration de GitLab sur la VM :
 
 bash
 Copier le code
-```sudo nano /etc/gitlab/gitlab.rb```
+sudo nano /etc/gitlab/gitlab.rb
 Ajoutez ou modifiez les lignes suivantes pour activer le Container Registry sur le port 5050 :
 
 ruby
 Copier le code
-```registry_external_url 'http://192.168.56.10:5050'```
+registry_external_url 'http://192.168.56.10:5050'
 Reconfigurez GitLab pour appliquer les modifications :
 
 bash
 Copier le code
-```sudo gitlab-ctl reconfigure```
+sudo gitlab-ctl reconfigure
 Après la reconfiguration, le GitLab Container Registry sera accessible à l'adresse http://192.168.56.10:5050.
 
 7. Gérer GitLab avec gitlab-ctl
@@ -111,17 +111,17 @@ Vérifier le statut des services :
 
 bash
 Copier le code
-```sudo gitlab-ctl status```
+sudo gitlab-ctl status
 Redémarrer GitLab :
 
 bash
 Copier le code
-```sudo gitlab-ctl restart```
+sudo gitlab-ctl restart
 Appliquer les modifications après une modification dans gitlab.rb :
 
 bash
 Copier le code
-```sudo gitlab-ctl reconfigure```
+sudo gitlab-ctl reconfigure
 8. (Optionnel) Gestion des ports et pare-feu
 Si vous rencontrez des problèmes d’accès depuis l’hôte, assurez-vous que les ports nécessaires sont ouverts et que le pare-feu ne bloque pas les connexions.
 
@@ -129,12 +129,12 @@ Vérifiez que le port 8080 est bien redirigé sur votre hôte :
 
 bash
 Copier le code
-```sudo netstat -tuln | grep 8080```
+sudo netstat -tuln | grep 8080
 Désactivez temporairement le pare-feu pour tester :
 
 bash
 Copier le code
-```sudo ufw disable```
+sudo ufw disable
 9. Arrêter et détruire la VM
 Si vous souhaitez arrêter ou détruire la VM :
 
@@ -142,11 +142,12 @@ Pour arrêter la VM (la mettre en pause sans détruire les données) :
 
 bash
 Copier le code
-```vagrant halt```
+vagrant halt
 Pour détruire la VM et effacer toutes les données :
 
 bash
 Copier le code
-```vagrant destroy```
+vagrant destroy
 Conclusion
 Vous avez maintenant une installation GitLab CE fonctionnelle sur une machine virtuelle avec Vagrant. Cette configuration peut être modifiée en fonction de vos besoins, et l’utilisation d'une IP statique permet de facilement accéder à GitLab depuis votre machine hôte.
+
