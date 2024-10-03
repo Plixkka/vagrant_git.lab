@@ -56,7 +56,9 @@ Copier le code
     vb.memory = "4096"  # Allouer 4 Go de RAM
     vb.cpus = 2         # Allouer 2 CPUs
   end
-end ```
+end
+```
+
 
 Explication des configurations :
 
