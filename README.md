@@ -2,6 +2,7 @@ Pré-requis
 Vagrant et VirtualBox doivent être installés sur votre machine hôte.
 Une connexion Internet pour télécharger les paquets nécessaires.
 Étapes d'installation
+
 1. Créer un répertoire de projet
 Commencez par créer un répertoire où vous allez configurer votre projet Vagrant.
 
