@@ -8,7 +8,7 @@ Commencez par créer un répertoire où vous allez configurer votre projet Vagra
 bash
 Copier le code
 ```mkdir gitlab-vagrant
-cd gitlab-vagrant```
+cd gitlab-vagrant````
 2. Initialiser Vagrant
 Dans le répertoire créé, exécutez la commande suivante pour initialiser un fichier Vagrantfile.
 
