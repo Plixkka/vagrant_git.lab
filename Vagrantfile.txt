@@ -1,0 +1,44 @@
+Vagrant.configure("2") do |config|
+  # Utiliser l'image de base Ubuntu
+  config.vm.box = "ubuntu/bionic64" # Ubuntu 18.04 LTS
+
+  # Configuration de la VM
+  config.vm.network "forwarded_port", guest: 80, host: 8080  # Redirige le port 80 de la VM vers le port 8080 de l'hôte
+
+  config.vm.provision "shell", inline: <<-SHELL
+    # Mettre à jour les paquets
+    apt-get update
+    apt-get upgrade -y
+
+    # Installer les dépendances nécessaires
+    apt-get install -y curl openssh-server ca-certificates
+
+    # Ajouter le dépôt GitLab
+    curl https://packages.gitlab.com/gpg.key | apt-key add -
+    echo "deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ bionic main" > /etc/apt/sources.list.d/gitlab_gitlab-ce.list
+
+    # Installer GitLab
+    apt-get update
+    apt-get install -y gitlab-ce
+
+    # Configurer GitLab
+    EXTERNAL_URL="http://localhost" gitlab-ctl reconfigure
+
+    # Activer le Container Registry
+    echo "registry_external_url 'http://localhost:5000'" >> /etc/gitlab/gitlab.rb
+    echo "gitlab_rails['registry_enabled'] = true" >> /etc/gitlab/gitlab.rb
+    echo "gitlab_rails['registry_host'] = 'localhost'" >> /etc/gitlab/gitlab.rb
+    echo "gitlab_rails['registry_port'] = 5000" >> /etc/gitlab/gitlab.rb
+    echo "gitlab_rails['registry_path'] = '/var/opt/gitlab/gitlab-rails/registry'" >> /etc/gitlab/gitlab.rb
+    echo "gitlab_rails['registry_api_url'] = 'http://localhost:5000'" >> /etc/gitlab/gitlab.rb
+
+    # Reconfigurer GitLab pour appliquer les changements
+    gitlab-ctl reconfigure
+  SHELL
+
+  # Configuration des ressources de la VM
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "4096"  # Allouer 4 Go de RAM
+    vb.cpus = 2         # Allouer 2 CPUs
+  end
+end
