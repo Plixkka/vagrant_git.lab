@@ -15,10 +15,11 @@ cd gitlab-vagrant
 Dans le répertoire créé, exécutez la commande suivante pour initialiser un fichier Vagrantfile.
 
 bash
+
 Copier le code
 
-vagrant init ubuntu/bionic64
-
+```vagrant init ubuntu/bionic64
+```
 Cela génère un fichier Vagrantfile basique pour Ubuntu 18.04 LTS (Bionic Beaver).
 
 3. Configurer le fichier Vagrantfile
