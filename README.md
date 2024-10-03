@@ -23,7 +23,8 @@ Modifiez le fichier Vagrantfile pour installer GitLab CE et configurer la VM ave
 
 ruby
 Copier le code
-Vagrant.configure("2") do |config|
+
+```Vagrant.configure("2") do |config|
   # Utiliser l'image de base Ubuntu 18.04
   config.vm.box = "ubuntu/bionic64"
 
@@ -55,7 +56,8 @@ Vagrant.configure("2") do |config|
     vb.memory = "4096"  # Allouer 4 Go de RAM
     vb.cpus = 2         # Allouer 2 CPUs
   end
-end
+end ```
+
 Explication des configurations :
 
 config.vm.box : Utilise Ubuntu 18.04 LTS comme image de base.
